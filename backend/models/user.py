@@ -1,10 +1,14 @@
+from flask_login import UserMixin
 from extensions import db
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
     username = db.Column(
         db.String(50),
@@ -28,6 +32,9 @@ class User(db.Model):
         db.ForeignKey("roles.role_id"),
         nullable=False
     )
+
+    def get_id(self):
+        return str(self.user_id)
 
     def __repr__(self):
         return f"<User {self.username}>"

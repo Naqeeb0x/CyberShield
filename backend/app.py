@@ -6,6 +6,8 @@ from models import User, Role
 from seeds.seed_roles import seed_roles
 from seeds.seed_admin import seed_admin
 from routes import main
+from auth.routes import auth
+import login_manager as login_setup
 
 # Create Flask application
 app = Flask(__name__)
@@ -21,6 +23,7 @@ login_manager.login_view = "auth.login"
 
 bcrypt.init_app(app)
 app.register_blueprint(main)
+app.register_blueprint(auth)
 
 
 if __name__ == "__main__":
@@ -31,4 +34,4 @@ if __name__ == "__main__":
 
     app.run(debug=Config.DEBUG)
 
-    app.run(debug=Config.DEBUG)
+ 
